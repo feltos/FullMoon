@@ -16,7 +16,7 @@ public class ControlsManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X)) //Manette X
+        if (Input.GetButtonDown("RemoveAttachHead")) //Manette X, clavier X
         {
             if (playerHead.transform.parent != null)
             {
