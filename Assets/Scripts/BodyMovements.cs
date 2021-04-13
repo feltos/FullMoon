@@ -12,9 +12,11 @@ public class BodyMovements : MonoBehaviour
     float move;
     Collider collider;
 
-    bool isGrounded = true;
+    bool isGrounded;
     Vector3 jump;
     float jumpForce = 2.0f;
+    [SerializeField]float rayDistance;
+    [SerializeField] LayerMask layers;
 
     void Start()
     {
@@ -37,6 +39,8 @@ public class BodyMovements : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         move = speed * horizontal;
 
+        CheckGroundStatus();
+
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             body.AddForce(jump * jumpForce, ForceMode.Impulse);
@@ -50,19 +54,36 @@ public class BodyMovements : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-        }
+
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        isGrounded = false;        
+        
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+
     }
 
     public void SetHeadOn()
     {
         headOn = !headOn;
+    }
+
+    void CheckGroundStatus()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, layers))
+        {
+            isGrounded = true;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.green);
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.red);
+        }
     }
 }
