@@ -19,7 +19,6 @@ public class ButtonHeld : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerFoot") || other.gameObject.layer == LayerMask.NameToLayer("PlayerHead"))
         {
             isPushed = true;
-            Debug.Log("POUSSER");
         }
     }
 
@@ -28,7 +27,6 @@ public class ButtonHeld : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerFoot") || other.gameObject.layer == LayerMask.NameToLayer("PlayerHead"))
         {
             isPushed = false;
-            Debug.Log("PAS POUSSER");
         }
     }
 
