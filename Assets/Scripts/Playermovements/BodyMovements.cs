@@ -67,9 +67,9 @@ public class BodyMovements : MonoBehaviour
 
     }
 
-    public void SetHeadOn()
+    public void SetHeadOn(bool headOnNew)
     {
-        headOn = !headOn;
+        headOn = headOnNew;
     }
 
     void CheckGroundStatus()

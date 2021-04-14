@@ -37,8 +37,7 @@ public class HeadMovements : MonoBehaviour
         verticalMovement = vertical * speed;
 
 
-        Debug.Log("Horizontal = " + horizontal);
-        Debug.Log("vertical = " + vertical);
+
         // Spin object around Y-Axis
 
         //transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
