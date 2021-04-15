@@ -52,21 +52,6 @@ public class BodyMovements : MonoBehaviour
         body.velocity = new Vector3(move,body.velocity.y,body.velocity.z);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-
-    }
-
     public void SetHeadOn(bool headOnNew)
     {
         headOn = headOnNew;

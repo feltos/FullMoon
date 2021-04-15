@@ -33,7 +33,7 @@ public class DoorOpener : MonoBehaviour
 
     void Update()
     {
-
+        
         UpdateButtonState();
         CheckIfCanOpen();
 
@@ -87,5 +87,13 @@ public class DoorOpener : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        foreach(GameObject button in buttons)
+        {
+            Debug.DrawLine(transform.position, button.transform.GetChild(0).position);
+        }        
     }
 }
