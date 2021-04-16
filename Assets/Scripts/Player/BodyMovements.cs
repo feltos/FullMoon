@@ -16,7 +16,9 @@ public class BodyMovements : MonoBehaviour
     Vector3 jump;
     float jumpForce = 2.0f;
     [SerializeField]float rayDistance;
-    [SerializeField] LayerMask layers;
+    //A CORRIGER
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask buttonLayer;
 
     void Start()
     {
@@ -60,7 +62,8 @@ public class BodyMovements : MonoBehaviour
     void CheckGroundStatus()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, layers))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, groundLayer) ||
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, rayDistance, buttonLayer))
         {
             isGrounded = true;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.green);
