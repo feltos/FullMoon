@@ -17,8 +17,8 @@ TagManager:
   - PlayerHead
   - Player
   - Door
-  - ButtonToHeld
-  - ButtonSimple
+  - Button
+  - 
   - Harmful
   - HeadDetectionZone
   - 

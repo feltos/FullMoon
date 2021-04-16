@@ -8,13 +8,12 @@ public class PlayerLifeSystem : MonoBehaviour
     [SerializeField] int playerlife;
     Rigidbody body;
     [SerializeField] float explosionforce;
-    bool canBeHit = true;
+    [SerializeField] bool canBeHit = true;
     float hitTimer = 3f;
     Scene actualScene;
     Scene lastScene;
     void Start()
     {
-        body = GetComponent<Rigidbody>();
         actualScene = SceneManager.GetActiveScene();
     }
 
@@ -30,13 +29,14 @@ public class PlayerLifeSystem : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Harmful") && canBeHit)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Harmful") && canBeHit)
         {
             playerlife -= 1;
             if (playerlife <= 0)
-            {
+            {                
                 SceneManager.LoadScene(actualScene.name);
             }
             canBeHit = false;

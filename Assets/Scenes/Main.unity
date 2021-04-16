@@ -492,7 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 1896780027}
   playerHead: {fileID: 1788858055}
-  bodyMovements: {fileID: 1896780033}
+  bodyMovements: {fileID: 0}
   HeadMovements: {fileID: 1788858061}
 --- !u!4 &1572954738
 Transform:
@@ -824,17 +824,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5879730301267802338, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
   m_PrefabInstance: {fileID: 5879730303163197469}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1896780033 stripped
+--- !u!114 &1896780029
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5879730301267802396, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
-  m_PrefabInstance: {fileID: 5879730303163197469}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896780027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78ac38abea2d4d343920c1fc74f8f3b1, type: 3}
+  m_Script: {fileID: 11500000, guid: af627fe245f20a4478dcf3b4a06172b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  headOn: 1
+  rayDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  buttonLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1896780036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,23 +973,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043a0c83bff211547bd37f7e1b955c52, type: 3}
---- !u!1 &4862931690501671621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 927840057197801697, guid: 054641d764e756b4ba2982b5a7aeadab, type: 3}
-  m_PrefabInstance: {fileID: 5736674456755026468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4862931690501671622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4862931690501671621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d035d09ad7d8a4a89306165966dc70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5736674456755026468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304604857559444811, guid: 054641d764e756b4ba2982b5a7aeadab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6304604857559444811, guid: 054641d764e756b4ba2982b5a7aeadab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1035,10 +1028,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7533146639925290473, guid: 054641d764e756b4ba2982b5a7aeadab, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5fff91b7ede65f649beeec2add2387fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054641d764e756b4ba2982b5a7aeadab, type: 3}
 --- !u!1001 &5879730303163197469
@@ -1060,13 +1049,17 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5879730301267802337, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5879730301267802338, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5879730301267802338, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -15.26
       objectReference: {fileID: 0}
     - target: {fileID: 5879730301267802338, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1108,6 +1101,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5879730301267802342, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879730301267802396, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
+      propertyPath: buttonLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879730301267802396, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5879730301394724565, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1116,7 +1121,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHead
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5879730301267802396, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bc77adce4ee3ba140b7b0339aefe5572, type: 3}
 --- !u!1001 &7095125587147837285
 PrefabInstance:

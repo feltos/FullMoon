@@ -7,7 +7,11 @@ public class Missile : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] ParticleSystem explosion;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        DestroyObject(this.gameObject, 7f);
+    }
+
     void Update()
     {
         transform.position += transform.right * Time.deltaTime * movementSpeed;
@@ -15,7 +19,11 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(explosion, transform.position, transform.rotation);
     }
 }

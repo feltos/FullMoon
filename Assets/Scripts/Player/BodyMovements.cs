@@ -6,8 +6,8 @@ public class BodyMovements : MonoBehaviour
 {
 
     float horizontal;
-    [SerializeField]float speed;
-    [SerializeField]bool headOn = true;
+    [SerializeField] float speed;
+    [SerializeField] bool headOn = true;
     Rigidbody body;
     float move;
     Collider collider;
@@ -15,10 +15,12 @@ public class BodyMovements : MonoBehaviour
     bool isGrounded;
     Vector3 jump;
     float jumpForce = 2.0f;
-    [SerializeField]float rayDistance;
-    //A CORRIGER
+    [SerializeField] float rayDistance;
+
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask buttonLayer;
+
+
 
     void Start()
     {
@@ -43,7 +45,7 @@ public class BodyMovements : MonoBehaviour
 
         CheckGroundStatus();
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             body.AddForce(jump * jumpForce, ForceMode.Impulse);
         }
@@ -51,7 +53,7 @@ public class BodyMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.velocity = new Vector3(move,body.velocity.y,body.velocity.z);
+        body.velocity = new Vector3(move, body.velocity.y, body.velocity.z);
     }
 
     public void SetHeadOn(bool headOnNew)
