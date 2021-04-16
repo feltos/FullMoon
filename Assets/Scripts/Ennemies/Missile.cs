@@ -5,21 +5,17 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
+    [SerializeField] ParticleSystem explosion;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position -= transform.forward * Time.deltaTime * movementSpeed;
+        transform.position += transform.right * Time.deltaTime * movementSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(this.gameObject);
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 }
