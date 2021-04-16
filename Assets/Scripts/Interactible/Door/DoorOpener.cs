@@ -18,14 +18,11 @@ public class DoorOpener : MonoBehaviour
         //Store bool state of buttons 
         for(int i = 0; i < buttons.Count; i++)
         {
-            if (buttons[i].layer == LayerMask.NameToLayer("ButtonSimple"))
+            if (buttons[i].layer == LayerMask.NameToLayer("Button"))
             {
-                buttonsState.Add(buttons[i].GetComponentInChildren<ButtonSimple>().GetIsPushed());
+                buttonsState.Add(buttons[i].GetComponentInChildren<Button>().GetIsPushed());
             }
-            else if(buttons[i].layer == LayerMask.NameToLayer("ButtonToHeld"))
-            {
-                buttonsState.Add(buttons[i].GetComponentInChildren<ButtonHeld>().GetIsPushed());
-            }
+
         }
         basePosition = transform.position;
         desiredPosition = new Vector3(basePosition.x, basePosition.y + 2.5f, basePosition.z);
@@ -48,6 +45,20 @@ public class DoorOpener : MonoBehaviour
         }
     }
 
+    void UpdateButtonState()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (buttons[i].GetComponentInChildren<Button>().GetIsPushed() == true)
+            {
+                buttonsState[i] = true;
+            }
+            else
+            {
+                buttonsState[i] = false;
+            }
+        }
+    }
     void CheckIfCanOpen()
     {
         if (buttonsState.TrueForAll(b => b))
@@ -57,35 +68,6 @@ public class DoorOpener : MonoBehaviour
         else
         {
             isOpen = false;
-        }
-    }
-
-    void UpdateButtonState()
-    {
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            if (buttons[i].GetComponentInChildren<ButtonHeld>() != null)
-            {
-                if (buttons[i].GetComponentInChildren<ButtonHeld>().GetIsPushed() == true)
-                {
-                    buttonsState[i] = true;
-                }
-                else
-                {
-                    buttonsState[i] = false;
-                }
-            }
-            if (buttons[i].GetComponentInChildren<ButtonSimple>() != null)
-            {
-                if (buttons[i].GetComponentInChildren<ButtonSimple>().GetIsPushed() == true)
-                {
-                    buttonsState[i] = true;
-                }
-                else
-                {
-                    buttonsState[i] = false;
-                }
-            }
         }
     }
 
