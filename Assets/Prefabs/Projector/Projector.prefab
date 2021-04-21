@@ -104,7 +104,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 651c65f3536fcf5439c22cc100a2c686, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -197,6 +197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflections: 1
   maxLength: 100
-  layer:
+  layerToHide:
     serializedVersion: 2
     m_Bits: 8192

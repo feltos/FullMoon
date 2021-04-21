@@ -12,12 +12,12 @@ public class Projector : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
     private Vector3 direction;
-    [SerializeField] LayerMask layer;
+    [SerializeField] LayerMask layerToHide;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        layer = ~layer;
+        layerToHide = ~layerToHide;
     }
 
     void Update()
@@ -30,21 +30,24 @@ public class Projector : MonoBehaviour
 
         for (int i = 0; i < reflections; i++)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, layer))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, layerToHide))
             {
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
 
-                if (hit.collider.gameObject.layer != LayerMask.NameToLayer("PlayerHead"))
-                {
-
-                }
-                else
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("PlayerHead"))
                 {
                     lineRenderer.positionCount += 1;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * remainingLength);
+                    remainingLength -= Vector3.Distance(ray.origin, hit.point);
+                    ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+                }
+                
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Receiver"))
+                {
+                    hit.collider.gameObject.GetComponent<Receiver>().Activate();
                 }
             }
         }
