@@ -32,15 +32,23 @@ public class PlayerLifeSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Harmful") && canBeHit)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Harmful"))
+        {
+            TakingDamage();
+        }
+    }
+
+    public void TakingDamage()
+    {
+        if (canBeHit)
         {
             playerlife -= 1;
             if (playerlife <= 0)
-            {                
+            {
                 SceneManager.LoadScene(actualScene.name);
             }
             canBeHit = false;
-
         }
+
     }
 }

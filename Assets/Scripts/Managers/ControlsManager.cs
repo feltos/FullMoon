@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using InControl;
 
 public class ControlsManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ControlsManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("RemoveAttachHead")) //Manette X, clavier X
+        if (InputManager.ActiveDevice.Action3.WasPressed) //Manette X
         {
             if (playerHead.transform.parent != null)
             {

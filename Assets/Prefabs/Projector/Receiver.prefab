@@ -126,3 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
+  activeMaterial: {fileID: 2100000, guid: 588d3ebacffea324ea33d57fff2a1be5, type: 2}
+  unactiveMaterial: {fileID: 2100000, guid: 4351b38fa5ad3b746b9b48193f85561d, type: 2}

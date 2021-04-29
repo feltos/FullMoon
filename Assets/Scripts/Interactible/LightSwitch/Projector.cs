@@ -23,7 +23,6 @@ public class Projector : MonoBehaviour
     void Update()
     {
         ray = new Ray(transform.position, transform.up);
-
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
         float remainingLength = maxLength;
@@ -41,14 +40,26 @@ public class Projector : MonoBehaviour
                 {
                     lineRenderer.positionCount += 1;
                     lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * remainingLength);
-                    remainingLength -= Vector3.Distance(ray.origin, hit.point);
-                    ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+
+                    if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, layerToHide))
+                    {
+                        lineRenderer.positionCount += 1;
+                        lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
+                        remainingLength -= Vector3.Distance(ray.origin, hit.point);
+                        ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+                    }
                 }
                 
                 if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Receiver"))
                 {
                     hit.collider.gameObject.GetComponent<Receiver>().Activate();
                 }
+
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    hit.collider.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage();
+                }
+
             }
         }
     }

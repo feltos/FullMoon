@@ -5,10 +5,12 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
+    float basicSpeed;
     [SerializeField] ParticleSystem explosion;
 
     private void Start()
     {
+        basicSpeed = movementSpeed;
         DestroyObject(this.gameObject, 7f);
     }
 
@@ -18,8 +20,24 @@ public class Missile : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {       
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("HeadDetectionZone"))
+        {
+            movementSpeed = movementSpeed / 2;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("HeadDetectionZone"))
+        {
+            movementSpeed = basicSpeed;
+        }
     }
 
     private void OnDestroy()
