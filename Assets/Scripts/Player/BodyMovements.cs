@@ -27,7 +27,7 @@ public class BodyMovements : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        freeGravity = baseGravity * 2;
+        freeGravity = baseGravity * 2.5f;
     }
 
     void Update()

@@ -22,11 +22,16 @@ public class HeadMovements : MonoBehaviour
     public float amplitude = 0.5f;
     public float frequency = 1f;
 
+    [SerializeField] float strength;
+    bool moving;
+    Vector3 basePosition;
+
     void Start()
     {        
         col = GetComponent<Collider>();
         body = GetComponent<Rigidbody>();
         particlesSystem = player.GetComponent<ParticleSystem>();
+        basePosition = transform.position;
     }
 
     void Update()
@@ -38,37 +43,19 @@ public class HeadMovements : MonoBehaviour
 
         // Spin object around Y-Axis
         transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
+
+        Debug.DrawLine(transform.position, headPos.transform.position);
     }
 
     private void FixedUpdate()
     {
-        if(transform.parent == null)
-        {
-            body.velocity = new Vector3(horizontalMovement, verticalMovement, 0);
-        }
+
+        ResistanceCheck();
+        body.velocity = new Vector3(horizontalMovement, verticalMovement, 0);
 
         if (transform.parent != null)
         {
-            transform.position = headPos.position;
-            particlesSystem.Pause();
-            particlesSystem.Clear();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player" && transform.parent == null)
-        {
-            canAttach = true;
-            particlesSystem.Play();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (transform.parent == null)
-        {
-            canAttach = false;
+            transform.position = basePosition;
             particlesSystem.Pause();
             particlesSystem.Clear();
         }
@@ -77,5 +64,38 @@ public class HeadMovements : MonoBehaviour
     public bool GetCanAttach()
     {
         return canAttach;
+    }
+
+    void ResistanceCheck()
+    {
+
+        Vector3 direction = headPos.transform.position - transform.position;
+        body.AddForce(strength * direction);
+
+        if (horizontal > 0.1 || horizontal < -0.1 || vertical > 0.1 || vertical < -0.1)
+        {
+            moving = true;
+            strength = 50;
+        }
+        else
+        {
+            moving = false;
+            strength = 500;
+        }
+
+        if (Vector3.Distance(transform.position, headPos.position) < 1 && moving)
+        {
+            speed = 1;
+            transform.parent = null;
+        }
+        if (Vector3.Distance(transform.position, headPos.position) > 1 && moving)
+        {
+            speed = 3;
+        }
+
+        if (Vector3.Distance(transform.position, headPos.position) < 0.1f && !moving)
+        {
+            transform.parent = player.transform;
+        }
     }
 }
