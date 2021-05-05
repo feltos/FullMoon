@@ -55,7 +55,7 @@ public class HeadMovements : MonoBehaviour
 
         if (transform.parent != null)
         {
-            transform.position = basePosition;
+            transform.position = headPos.position;
             particlesSystem.Pause();
             particlesSystem.Clear();
         }
@@ -74,28 +74,36 @@ public class HeadMovements : MonoBehaviour
 
         if (horizontal > 0.1 || horizontal < -0.1 || vertical > 0.1 || vertical < -0.1)
         {
-            moving = true;
-            strength = 50;
+            moving = true;            
         }
         else
         {
-            moving = false;
-            strength = 500;
+            moving = false;          
         }
 
         if (Vector3.Distance(transform.position, headPos.position) < 1 && moving)
         {
             speed = 1;
+            strength = 50;
             transform.parent = null;
         }
+
+        if (Vector3.Distance(transform.position, headPos.position) < 1 && !moving)
+        {
+            strength = 500;
+        }
+
         if (Vector3.Distance(transform.position, headPos.position) > 1 && moving)
         {
             speed = 3;
+            strength = 0;
+            player.GetComponent<BodyMovements>().SetHeadOn(false);
         }
 
         if (Vector3.Distance(transform.position, headPos.position) < 0.1f && !moving)
         {
             transform.parent = player.transform;
+            player.GetComponent<BodyMovements>().SetHeadOn(true);
         }
     }
 }
