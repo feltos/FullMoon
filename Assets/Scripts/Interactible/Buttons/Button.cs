@@ -52,6 +52,7 @@ public class Button : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("PlayerFoot") || other.gameObject.layer == LayerMask.NameToLayer("PlayerHead"))
         {
+            Debug.Log("Pushed");
             isPushed = true;
         }
     }

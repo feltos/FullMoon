@@ -14,7 +14,6 @@ public class HeadMovements : MonoBehaviour
     Collider col;
     [SerializeField] GameObject player;
     bool canAttach = false;
-    private ParticleSystem particlesSystem;
     [SerializeField]Transform headPos;
 
     //Rotation of the head
@@ -30,7 +29,6 @@ public class HeadMovements : MonoBehaviour
     {        
         col = GetComponent<Collider>();
         body = GetComponent<Rigidbody>();
-        particlesSystem = player.GetComponent<ParticleSystem>();
         basePosition = transform.position;
     }
 
@@ -51,13 +49,12 @@ public class HeadMovements : MonoBehaviour
     {
 
         ResistanceCheck();
+
         body.velocity = new Vector3(horizontalMovement, verticalMovement, 0);
 
         if (transform.parent != null)
         {
             transform.position = headPos.position;
-            particlesSystem.Pause();
-            particlesSystem.Clear();
         }
     }
 
@@ -68,7 +65,6 @@ public class HeadMovements : MonoBehaviour
 
     void ResistanceCheck()
     {
-
         Vector3 direction = headPos.transform.position - transform.position;
         body.AddForce(strength * direction);
 
@@ -78,7 +74,7 @@ public class HeadMovements : MonoBehaviour
         }
         else
         {
-            moving = false;          
+            moving = false;
         }
 
         if (Vector3.Distance(transform.position, headPos.position) < 1 && moving)
@@ -95,7 +91,7 @@ public class HeadMovements : MonoBehaviour
 
         if (Vector3.Distance(transform.position, headPos.position) > 1 && moving)
         {
-            speed = 3;
+            speed = 4;
             strength = 0;
             player.GetComponent<BodyMovements>().SetHeadOn(false);
         }
