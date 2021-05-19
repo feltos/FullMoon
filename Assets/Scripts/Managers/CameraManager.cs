@@ -1,47 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using InControl;
 
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField]Transform actualPosition;
+    [SerializeField]Transform unzoomPosition;
+    public bool pressed = false;
+    float speed = 10;
 
-    [SerializeField] Transform lookAt;
-    [SerializeField] float boundX;
-    [SerializeField] float boundY;
-
-    private void LateUpdate()
+    private void Start()
     {
-        Vector3 delta = Vector3.zero;
+        
+    }
+    private void Update()
+    {
 
-        //X axis
-        float dx = lookAt.position.x - transform.position.x;
-        if(dx > boundX || dx < -boundX)
+        if (InputManager.ActiveDevice.RightTrigger.WasPressed)
         {
-            if(transform.position.x < lookAt.position.x)
-            {
-                delta.x = dx - boundX;
-            }
-            else
-            {
-                delta.x = dx + boundX;
-            }
+            pressed = true;
+        }
+        if (InputManager.ActiveDevice.RightTrigger.WasReleased)
+        {
+            pressed = false;
         }
 
-        //Y axis
-        float dy = lookAt.position.y - transform.position.y;
-        if (dy > boundX || dy < -boundX)
+        if (pressed)
         {
-            if (transform.position.y < lookAt.position.y)
-            {
-                delta.y = dy - boundY;
-            }
-            else
-            {
-                delta.y = dy + boundY;
-            }
+            Debug.Log("UNZOOM");
+            transform.position = Vector3.Lerp(transform.position, unzoomPosition.position, speed * Time.deltaTime);
         }
-
-        //Move camera
-        transform.position = transform.position + delta;
+        if (!pressed)
+        {
+            transform.position = Vector3.Lerp(transform.position, actualPosition.position, speed * Time.deltaTime);
+        }
     }
 }
