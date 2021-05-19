@@ -5,35 +5,42 @@ using InControl;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField]Transform actualPosition;
+    Transform actualPosition;
     [SerializeField]Transform unzoomPosition;
-    public bool pressed = false;
     float speed = 10;
+    [SerializeField] Transform player;
 
-    private void Start()
+    enum CameraState
     {
-        
+        ZOOM,
+        UNZOOM
     }
+
+    CameraState cameraState = CameraState.ZOOM;
+
     private void Update()
     {
+        switch (cameraState)
+        {
+            case CameraState.UNZOOM:
 
-        if (InputManager.ActiveDevice.RightTrigger.WasPressed)
-        {
-            pressed = true;
-        }
-        if (InputManager.ActiveDevice.RightTrigger.WasReleased)
-        {
-            pressed = false;
-        }
+                transform.position = Vector3.Lerp(transform.position, unzoomPosition.position, speed * Time.deltaTime);
 
-        if (pressed)
-        {
-            Debug.Log("UNZOOM");
-            transform.position = Vector3.Lerp(transform.position, unzoomPosition.position, speed * Time.deltaTime);
-        }
-        if (!pressed)
-        {
-            transform.position = Vector3.Lerp(transform.position, actualPosition.position, speed * Time.deltaTime);
+                if (InputManager.ActiveDevice.RightTrigger.WasReleased)
+                {
+                    cameraState = CameraState.ZOOM;
+                }
+                break;
+
+            case CameraState.ZOOM:
+
+                transform.position = Vector3.Lerp(transform.position, player.position, speed * Time.deltaTime);
+
+                if (InputManager.ActiveDevice.RightTrigger.WasPressed)
+                {
+                    cameraState = CameraState.UNZOOM;
+                }
+                break;
         }
     }
 }
