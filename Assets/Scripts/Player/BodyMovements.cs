@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using InControl;
+using UnityEngine.SceneManagement;
 
 public class BodyMovements : MonoBehaviour
 {
@@ -84,6 +85,15 @@ public class BodyMovements : MonoBehaviour
         {
             isGrounded = false;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.red);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("RestartZone"))
+        {
+            Debug.Log("enterTrigger");
+            SceneManager.LoadScene("CameraTest");
         }
     }
 }

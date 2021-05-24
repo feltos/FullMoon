@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using InControl;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CameraManager : MonoBehaviour
     float maxPosX;
     float minPosY;
     float maxPosY;
+
+    //[SerializeField]CinemachineVirtualCamera virtualCamera;
 
     enum CameraState
     {
@@ -33,6 +36,8 @@ public class CameraManager : MonoBehaviour
 
         minPosY = MapSize.transform.position.y - MapSize.bounds.size.y / 2f;
         maxPosY = MapSize.transform.position.y + MapSize.bounds.size.y / 2f;
+
+        
     }
 
     Vector3 ClampCamera(Vector3 targetPosition)
@@ -60,19 +65,23 @@ public class CameraManager : MonoBehaviour
 
                 if (InputManager.ActiveDevice.RightTrigger.WasReleased)
                 {
+                    //virtualCamera.Follow = player;
                     cameraState = CameraState.ZOOM;
                 }
                 break;
 
             case CameraState.ZOOM:
 
+                transform.position = Vector3.Lerp(transform.position, player.position, speed * Time.deltaTime);
+
                 transform.position = ClampCamera(transform.position);
 
-                transform.position = Vector3.Lerp(transform.position, player.position, speed * Time.deltaTime);
+                
 
 
                 if (InputManager.ActiveDevice.RightTrigger.WasPressed)
                 {
+                    //virtualCamera.Follow = null;
                     cameraState = CameraState.UNZOOM;
                 }
                 break;
