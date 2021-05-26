@@ -40,7 +40,7 @@ public class HeadMovements : MonoBehaviour
         verticalMovement = vertical * speed;
 
         // Spin object around Y-Axis
-        transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
+        //transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
 
         Debug.DrawLine(transform.position, headPos.transform.position);
     }

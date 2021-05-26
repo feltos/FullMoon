@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6680629740001088398}
   - component: {fileID: 6680629740001088393}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera Zoom
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unzoomPosition: {fileID: 0}
-  player: {fileID: 0}
+  cameraFocus: {fileID: 0}
+  MapSize: {fileID: 0}

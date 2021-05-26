@@ -4,12 +4,12 @@ using UnityEngine;
 using InControl;
 using Cinemachine;
 
-public class CameraManager : MonoBehaviour
+public class CameraZoom : MonoBehaviour
 {
     Transform actualPosition;
     [SerializeField]    Transform unzoomPosition;
     float speed = 10;
-    [SerializeField] Transform player;
+    [SerializeField] Transform cameraFocus;
 
     Vector3 offset;
     [SerializeField]MeshRenderer MapSize;
@@ -72,12 +72,11 @@ public class CameraManager : MonoBehaviour
 
             case CameraState.ZOOM:
 
-                transform.position = Vector3.Lerp(transform.position, player.position, speed * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, cameraFocus.position, speed * Time.deltaTime);
 
                 transform.position = ClampCamera(transform.position);
 
-                
-
+              
 
                 if (InputManager.ActiveDevice.RightTrigger.WasPressed)
                 {
