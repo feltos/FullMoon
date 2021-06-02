@@ -10,10 +10,6 @@ public class ControlsManager : MonoBehaviour
     [SerializeField] GameObject playerHead;
     [SerializeField] BodyMovements bodyMovements;
     [SerializeField] HeadMovements HeadMovements;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

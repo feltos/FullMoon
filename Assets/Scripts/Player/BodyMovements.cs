@@ -22,13 +22,13 @@ public class BodyMovements : MonoBehaviour
     float verticalVelocity;
     float gravity;
     [SerializeField] float baseGravity;
-    float freeGravity;
+    float noHeadGravity;
     [SerializeField] float jumpForce;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        freeGravity = baseGravity * 2.5f;
+        noHeadGravity = baseGravity * 6;
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class BodyMovements : MonoBehaviour
         }
         else if (!headOn)
         {
-            gravity = freeGravity;
+            gravity = noHeadGravity;
         }
 
         CheckGroundStatus();
@@ -51,8 +51,7 @@ public class BodyMovements : MonoBehaviour
             if (InputManager.ActiveDevice.Action1.WasPressed)
             {
                 Debug.Log("Jumped");
-                verticalVelocity = jumpForce;
-                
+                verticalVelocity = jumpForce;                
             }
         }
         else
