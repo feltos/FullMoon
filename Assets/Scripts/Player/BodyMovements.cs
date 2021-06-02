@@ -46,13 +46,10 @@ public class BodyMovements : MonoBehaviour
 
         if (isGrounded)
         {
-            Debug.Log("Grounded");
             verticalVelocity = -gravity * Time.deltaTime;
             if (InputManager.ActiveDevice.Action1.WasPressed)
             {
-                Debug.Log("Jumped");
-                verticalVelocity = jumpForce;
-                
+                verticalVelocity = jumpForce;       
             }
         }
         else

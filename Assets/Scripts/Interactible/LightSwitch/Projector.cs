@@ -33,21 +33,24 @@ public class Projector : MonoBehaviour
             lineRenderer.positionCount += 1;
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
             remainingLength -= Vector3.Distance(ray.origin, hit.point);
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Receiver"))
+            {
+                hit.collider.gameObject.GetComponent<Receiver>().Activate();
+            }
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                hit.collider.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage();
+            }
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("HeadReflector"))
+            {
+                hit.collider.gameObject.GetComponent<HeadReflector>().ActivateReflector();
+            }
+
         }
 
-        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Receiver"))
-        {
-            hit.collider.gameObject.GetComponent<Receiver>().Activate();
-        }
-
-        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            hit.collider.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage();
-        }
-
-        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("HeadReflector"))
-        {
-            hit.collider.gameObject.GetComponent<HeadReflector>().ActivateReflector();
-        }             
+            
     }
 }
