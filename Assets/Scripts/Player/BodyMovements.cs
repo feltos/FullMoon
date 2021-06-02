@@ -51,7 +51,8 @@ public class BodyMovements : MonoBehaviour
             if (InputManager.ActiveDevice.Action1.WasPressed)
             {
                 Debug.Log("Jumped");
-                verticalVelocity = jumpForce;                
+                verticalVelocity = jumpForce;
+                
             }
         }
         else

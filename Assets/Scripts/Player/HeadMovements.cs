@@ -14,7 +14,7 @@ public class HeadMovements : MonoBehaviour
     Collider col;
     [SerializeField] GameObject player;
     bool canAttach = false;
-    [SerializeField]Transform headPos;
+    [SerializeField] Transform headPos;
 
     //Rotation of the head
     public float degreesPerSecond = 15.0f;
@@ -26,7 +26,7 @@ public class HeadMovements : MonoBehaviour
     Vector3 basePosition;
 
     void Start()
-    {        
+    {
         col = GetComponent<Collider>();
         body = GetComponent<Rigidbody>();
         basePosition = transform.position;
@@ -70,7 +70,7 @@ public class HeadMovements : MonoBehaviour
 
         if (horizontal > 0.1 || horizontal < -0.1 || vertical > 0.1 || vertical < -0.1)
         {
-            moving = true;            
+            moving = true;
         }
         else
         {
