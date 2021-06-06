@@ -25,6 +25,9 @@ public class BodyMovements : MonoBehaviour
     float noHeadGravity;
     [SerializeField] float jumpForce;
 
+    Transform latePos;
+    
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -93,4 +96,6 @@ public class BodyMovements : MonoBehaviour
             SceneManager.LoadScene("CameraTest");
         }
     }
+
+
 }
