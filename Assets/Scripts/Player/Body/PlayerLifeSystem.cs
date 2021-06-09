@@ -15,14 +15,15 @@ public class PlayerLifeSystem : MonoBehaviour
     Scene lastScene;
 
     CharacterController cc;
-    [SerializeField] ParticleSystem explosion;
-    Vector3 lastPos;
-    float lastPosTimer = 1;
+    LevelManager levelManager;
+
 
     void Start()
     {
         actualScene = SceneManager.GetActiveScene();
         cc = GetComponent<CharacterController>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
     }
 
     void Update()
@@ -36,37 +37,15 @@ public class PlayerLifeSystem : MonoBehaviour
                 hitTimer = 3f;
             }
         }
-
-        lastPosTimer -= Time.deltaTime;
-        if(lastPosTimer <= 0)
-        {
-            lastPos = transform.position;
-            lastPosTimer = 1;
-        }
     }
-
-
-    void RespawnBody(Transform transform)
-    {
-        cc.enabled = false;
-        transform.position = lastPos;
-        cc.enabled = true;
-    }
-
 
     public void TakingDamage()
     {
         if (canBeHit)
         {
-            //playerlife -= 1;
-            //if (playerlife <= 0)
-            //{
-            //    SceneManager.LoadScene(actualScene.name);
-            //}
-            RespawnBody(transform);
+            levelManager.CheckLastCheckpoint(this.transform);
             canBeHit = false;
         }
-        RespawnBody(transform);
     }
 
 }

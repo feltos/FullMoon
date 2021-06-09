@@ -13,7 +13,7 @@ public class HeadReflector : MonoBehaviour
     private Ray ray;
     private RaycastHit hit;
     private Vector3 direction;
-    float rotationSpeed = 50;
+    [SerializeField] float rotationSpeed;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class HeadReflector : MonoBehaviour
     void Update()
     {
         //Ray if hit by Laser
-        ray = new Ray(transform.position, -transform.up);
+        ray = new Ray(transform.position, transform.right);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
         float remainingLength = maxLength;
