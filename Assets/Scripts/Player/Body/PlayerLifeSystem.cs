@@ -15,6 +15,8 @@ public class PlayerLifeSystem : MonoBehaviour
     Scene lastScene;
 
     CharacterController cc;
+    Vector3 impact = Vector3.zero;
+    float mass = 3;
     LevelManager levelManager;
 
     BodyMovements bodyMovements;
@@ -36,18 +38,38 @@ public class PlayerLifeSystem : MonoBehaviour
             if (hitTimer <= 0)
             {
                 canBeHit = true;
-                hitTimer = 1f;
+                hitTimer = 0.2f;
             }
         }
+
+        // apply the impact force:
+        if (impact.magnitude > 0.2)
+        {
+            cc.Move(impact * Time.deltaTime);
+        }
+        // consumes the impact energy each cycle:
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 
-    public void TakingDamage(Vector3 direction)
+    public void TakingDamage(Vector3 direction, float force)
     {
         if (canBeHit)
         {
             //levelManager.CheckLastCheckpoint(this.transform);
+            addImpact(direction, force);
             canBeHit = false;
         }
+    }
+
+    void addImpact(Vector3 direction, float force)
+    {
+        direction.z = 0;
+        direction.Normalize();
+        if(direction.y < 0)
+        {
+            direction.y = -direction.y;
+        }
+        impact += new Vector3( direction.x * force * 5, (direction.y * force) / 2, 0);
     }
 
 }

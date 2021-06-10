@@ -20,7 +20,14 @@ public class Missile : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {       
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Debug.Log("TRIGGER");
+            Vector3 direction = collision.gameObject.transform.position - transform.position;
+            collision.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage(direction, 5);
+
+        }
         Destroy(this.gameObject);
     }
 
@@ -29,7 +36,7 @@ public class Missile : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("HeadDetectionZone"))
         {
             movementSpeed = movementSpeed / 2;
-        }
+        }     
     }
 
     private void OnTriggerExit(Collider other)
@@ -39,6 +46,8 @@ public class Missile : MonoBehaviour
             movementSpeed = basicSpeed;
         }
     }
+
+ 
 
     private void OnDestroy()
     {
