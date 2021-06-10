@@ -26,12 +26,14 @@ public class BodyMovements : MonoBehaviour
     [SerializeField] float jumpForce;
 
     Transform latePos;
-    
+
+    Vector3 moveVector;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         noHeadGravity = baseGravity * 6;
+        
     }
 
     void Update()
@@ -47,6 +49,7 @@ public class BodyMovements : MonoBehaviour
 
         CheckGroundStatus();
 
+  
         if (isGrounded)
         {
             verticalVelocity = -gravity * Time.deltaTime;
@@ -62,9 +65,9 @@ public class BodyMovements : MonoBehaviour
 
         horizontal = Input.GetAxis("Horizontal");
         move = speed * horizontal;
-
-        Vector3 moveVector = new Vector3(move, verticalVelocity, 0);       
+        moveVector = new Vector3(move, verticalVelocity, 0);
         characterController.Move(moveVector * Time.deltaTime);
+
     }
 
     public void SetHeadOn(bool headOnNew)
@@ -96,6 +99,4 @@ public class BodyMovements : MonoBehaviour
             SceneManager.LoadScene("CameraTest");
         }
     }
-
-
 }

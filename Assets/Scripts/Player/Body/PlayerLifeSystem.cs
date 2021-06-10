@@ -10,20 +10,22 @@ public class PlayerLifeSystem : MonoBehaviour
     Rigidbody body;
     [SerializeField] float explosionforce;
     [SerializeField] bool canBeHit = true;
-    float hitTimer = 3f;
+    float hitTimer = 1f;
     Scene actualScene;
     Scene lastScene;
 
     CharacterController cc;
     LevelManager levelManager;
 
+    BodyMovements bodyMovements;
+     
 
     void Start()
     {
         actualScene = SceneManager.GetActiveScene();
         cc = GetComponent<CharacterController>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-
+        bodyMovements = gameObject.GetComponent<BodyMovements>();
     }
 
     void Update()
@@ -34,16 +36,16 @@ public class PlayerLifeSystem : MonoBehaviour
             if (hitTimer <= 0)
             {
                 canBeHit = true;
-                hitTimer = 3f;
+                hitTimer = 1f;
             }
         }
     }
 
-    public void TakingDamage()
+    public void TakingDamage(Vector3 direction)
     {
         if (canBeHit)
         {
-            levelManager.CheckLastCheckpoint(this.transform);
+            //levelManager.CheckLastCheckpoint(this.transform);
             canBeHit = false;
         }
     }

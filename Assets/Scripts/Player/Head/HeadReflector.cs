@@ -42,7 +42,9 @@ public class HeadReflector : MonoBehaviour
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                hit.collider.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage();
+                Vector3 hitDirection = hit.transform.position - transform.position;
+                hitDirection = hitDirection.normalized;
+                hit.collider.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage(hitDirection);
             }
         }
 
