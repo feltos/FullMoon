@@ -10,12 +10,17 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] Transform playerFocus;
     [SerializeField] Transform headFocus;
 
-    Vector3 offset;
-    [SerializeField] MeshRenderer MapSize;
+    Vector3 offset = new Vector3(1,1,1);
     float minPosX;
     float maxPosX;
     float minPosY;
     float maxPosY;
+
+    [SerializeField] Transform minPosTransformX;
+    [SerializeField] Transform maxPosTransformX;
+
+    [SerializeField] Transform minPosTransformY;
+    [SerializeField] Transform maxPosTransformY;
 
     //[SerializeField]CinemachineVirtualCamera virtualCamera;
 
@@ -30,11 +35,11 @@ public class CameraSwitch : MonoBehaviour
 
     private void Awake()
     {
-        minPosX = MapSize.transform.position.x - MapSize.bounds.size.x / 2f;
-        maxPosX = MapSize.transform.position.x + MapSize.bounds.size.x / 2f;
+        minPosX = minPosTransformX.position.x - offset.x;
+        maxPosX = maxPosTransformX.position.x + offset.x;
 
-        minPosY = MapSize.transform.position.y - MapSize.bounds.size.y / 2f;
-        maxPosY = MapSize.transform.position.y + MapSize.bounds.size.y / 2f;
+        minPosY = minPosTransformY.position.y - 4;
+        maxPosY = maxPosTransformY.position.y + offset.y;
 
 
     }
