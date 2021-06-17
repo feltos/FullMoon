@@ -7,6 +7,9 @@ public class Button : MonoBehaviour
     [SerializeField] bool isPushed = false;
     Vector3 basePosition;
     Vector3 desiredPosition;
+    MeshRenderer meshRenderer;
+    [SerializeField] Material pushMaterial;
+    [SerializeField] Material heldMaterial;
     enum buttonType
     {
         SIMPLE_BUTTON,
@@ -17,7 +20,8 @@ public class Button : MonoBehaviour
     private void Start()
     {
         basePosition = transform.position;
-        desiredPosition = new Vector3(basePosition.x, basePosition.y - 0.15f, basePosition.z);
+        desiredPosition = basePosition - transform.up / 100 * 15;
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     void Update()
@@ -25,6 +29,8 @@ public class Button : MonoBehaviour
         switch (button)
         {
             case buttonType.SIMPLE_BUTTON:
+
+                meshRenderer.material = pushMaterial;
 
                 if (isPushed)
                 {
@@ -34,6 +40,8 @@ public class Button : MonoBehaviour
                 break;
 
             case buttonType.BUTTON_TO_HELD:
+
+                meshRenderer.material = heldMaterial;
 
                 if (isPushed)
                 {

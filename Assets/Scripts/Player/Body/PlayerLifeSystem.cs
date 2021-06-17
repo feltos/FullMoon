@@ -55,9 +55,9 @@ public class PlayerLifeSystem : MonoBehaviour
     {
         if (canBeHit)
         {
-            //levelManager.CheckLastCheckpoint(this.transform);
-            addImpact(direction, force);
-            canBeHit = false;
+            levelManager.CheckLastCheckpoint(this.transform);
+            //addImpact(direction, force);
+            //canBeHit = false;
         }
     }
 

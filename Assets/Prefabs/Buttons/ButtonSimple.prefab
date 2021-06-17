@@ -207,4 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushed: 0
+  pushMaterial: {fileID: 2100000, guid: 97c6182e0560a9c4f9ca72c63cf77083, type: 2}
+  heldMaterial: {fileID: 2100000, guid: 1dcd0f31c0ffb764da5a2eb6968c8474, type: 2}
   button: 0
