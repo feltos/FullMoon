@@ -26,7 +26,6 @@ public class Missile : MonoBehaviour
             Debug.Log("TRIGGER");
             Vector3 direction = collision.gameObject.transform.position - transform.position;
             collision.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage(direction, 5);
-
         }
         Destroy(this.gameObject);
     }

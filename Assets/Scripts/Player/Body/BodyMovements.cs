@@ -90,13 +90,4 @@ public class BodyMovements : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * rayDistance, Color.red);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("RestartZone"))
-        {
-            Debug.Log("enterTrigger");
-            SceneManager.LoadScene("CameraTest");
-        }
-    }
 }

@@ -85,4 +85,13 @@ public class PlayerLifeSystem : MonoBehaviour
         impact += new Vector3( direction.x * force * 5, (direction.y * force) / 2, 0);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("RestartZone"))
+        {
+            Debug.Log("enterTrigger");
+            levelManager.CheckLastCheckpoint(this.transform);
+        }
+    }
+
 }
