@@ -20,7 +20,13 @@ public class PlayerLifeSystem : MonoBehaviour
     LevelManager levelManager;
 
     BodyMovements bodyMovements;
-     
+
+    enum DamageType
+    {
+        KNOCKBACK,
+        CHECKPOINT
+    }
+    [SerializeField] DamageType damage;
 
     void Start()
     {
@@ -55,9 +61,16 @@ public class PlayerLifeSystem : MonoBehaviour
     {
         if (canBeHit)
         {
-            levelManager.CheckLastCheckpoint(this.transform);
-            //addImpact(direction, force);
-            //canBeHit = false;
+            if(damage == DamageType.CHECKPOINT)
+            {
+                levelManager.CheckLastCheckpoint(this.transform);
+            }
+
+            if(damage == DamageType.KNOCKBACK)
+            {
+                addImpact(direction, force);
+                canBeHit = false;
+            }
         }
     }
 

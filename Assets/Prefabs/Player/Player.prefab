@@ -317,12 +317,12 @@ GameObject:
   - component: {fileID: 5879730301267802338}
   - component: {fileID: 5879730301267802339}
   - component: {fileID: 5879730301267802336}
-  - component: {fileID: 5879730301267802337}
   - component: {fileID: 5879730301267802398}
   - component: {fileID: 5879730301267802399}
   - component: {fileID: 7674863445083020606}
   - component: {fileID: 7674863445083020482}
   - component: {fileID: 7674863445083020487}
+  - component: {fileID: 1572020115}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -398,19 +398,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5879730301267802337
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5879730301267802342}
-  m_Material: {fileID: 13400000, guid: ebefade122f1e1841a8b002d556435b6, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &5879730301267802398
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5199,7 +5186,7 @@ CharacterController:
   m_Height: 1
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -5241,7 +5228,21 @@ MonoBehaviour:
   playerlife: 1
   explosionforce: 50
   canBeHit: 1
-  explosion: {fileID: 3536695175457804848, guid: 474cb2e32e5b9464cb0d6f85b0ea0828, type: 3}
+  damage: 1
+--- !u!136 &1572020115
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879730301267802342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7674863444622607108
 GameObject:
   m_ObjectHideFlags: 0
