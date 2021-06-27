@@ -8,6 +8,7 @@ public class SetParent : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("paretn set");
             collision.transform.SetParent(transform.parent);
         }
     }
@@ -16,7 +17,9 @@ public class SetParent : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("paretn UNset");
             collision.transform.SetParent(null);
         }
     }
+
 }
