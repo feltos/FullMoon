@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - FxTemporaire
+  - LevelSelector
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Receiver
   - RestartZone
   - HeadReflector
-  - 
+  - LevelSelector
   - 
   - 
   - 
