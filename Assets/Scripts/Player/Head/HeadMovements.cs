@@ -11,50 +11,48 @@ public class HeadMovements : MonoBehaviour
     float verticalMovement;
     [SerializeField] float speed;
     Rigidbody body;
-    Collider col;
     [SerializeField] GameObject player;
     bool canAttach = false;
     [SerializeField] Transform headPos;
 
     //Rotation of the head
-    public float degreesPerSecond = 15.0f;
-    public float amplitude = 0.5f;
-    public float frequency = 1f;
+    //public float degreesPerSecond = 15.0f;
+    //public float amplitude = 0.5f;
+    //public float frequency = 1f;
 
     [SerializeField] float strength;
     bool moving;
-    Vector3 basePosition;
 
     void Start()
     {
-        col = GetComponent<Collider>();
-        body = GetComponent<Rigidbody>();
-        basePosition = transform.position;
+        body = GetComponent<Rigidbody>();      
     }
 
     void Update()
-    {
-        horizontal = Input.GetAxis("HorizontalHead");
-        vertical = Input.GetAxis("VerticalHead");
+    {    
         horizontalMovement = horizontal * speed;
         verticalMovement = vertical * speed;
-
-        // Spin object around Y-Axis
-        //transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
+        horizontal = Input.GetAxis("HorizontalHead");
+        vertical = Input.GetAxis("VerticalHead");
+        Debug.Log(horizontalMovement);
 
         Debug.DrawLine(transform.position, headPos.transform.position);
     }
 
     private void FixedUpdate()
     {
-
-        ResistanceCheck();
-
-        body.velocity = new Vector3(horizontalMovement, verticalMovement, 0);
-
-        if (transform.parent != null)
+        if(transform.parent == null)
         {
-            transform.position = headPos.position;
+            body.velocity = new Vector3(horizontalMovement, verticalMovement, 0);
+        }
+
+        if (Vector3.Distance(transform.position, headPos.transform.position) <= 3)
+        {
+            canAttach = true;
+        }
+        else
+        {
+            canAttach = false;
         }
     }
 
@@ -93,13 +91,11 @@ public class HeadMovements : MonoBehaviour
         {
             speed = 4;
             strength = 0;
-            player.GetComponent<BodyMovements>().SetHeadOn(false);
         }
 
         if (Vector3.Distance(transform.position, headPos.position) < 0.1f && !moving)
         {
             transform.parent = player.transform;
-            player.GetComponent<BodyMovements>().SetHeadOn(true);
         }
     }
 }

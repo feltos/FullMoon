@@ -53,7 +53,7 @@ public class BodyMovements : MonoBehaviour
         if (isGrounded)
         {
             verticalVelocity = -gravity * Time.deltaTime;
-            if (InputManager.ActiveDevice.Action1.WasPressed)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 verticalVelocity = jumpForce;       
             }

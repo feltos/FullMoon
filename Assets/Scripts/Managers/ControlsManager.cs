@@ -13,7 +13,7 @@ public class ControlsManager : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.ActiveDevice.Action3.WasPressed) //Manette X
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             if (playerHead.transform.parent != null)
             {
@@ -27,5 +27,6 @@ public class ControlsManager : MonoBehaviour
                 bodyMovements.SetHeadOn(true);
             }
         }
+
     }
 }
