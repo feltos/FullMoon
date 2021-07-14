@@ -5360,9 +5360,6 @@ MonoBehaviour:
   speed: 5
   player: {fileID: 5879730301267802342}
   headPos: {fileID: 6565516589002546015}
-  degreesPerSecond: 15
-  amplitude: 0.5
-  frequency: 1
   strength: 1
 --- !u!54 &4258830941112822546
 Rigidbody:
