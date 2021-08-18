@@ -20,6 +20,7 @@ public class PlayerLifeSystem : MonoBehaviour
     LevelManager levelManager;
 
     BodyMovements bodyMovements;
+    [SerializeField] HeadMovements headMovements;
 
     enum DamageType
     {
@@ -64,6 +65,8 @@ public class PlayerLifeSystem : MonoBehaviour
             if(damage == DamageType.CHECKPOINT)
             {
                 levelManager.CheckLastCheckpoint(this.transform);
+                headMovements.Repop();
+                bodyMovements.SetHeadOn(true);
             }
 
             if(damage == DamageType.KNOCKBACK)
@@ -88,8 +91,7 @@ public class PlayerLifeSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("RestartZone"))
-        {
-            Debug.Log("enterTrigger");
+        {            
             levelManager.CheckLastCheckpoint(this.transform);
         }
     }

@@ -5228,6 +5228,7 @@ MonoBehaviour:
   playerlife: 1
   explosionforce: 50
   canBeHit: 1
+  headMovements: {fileID: 7674863444622607118}
   damage: 1
 --- !u!136 &1572020115
 CapsuleCollider:

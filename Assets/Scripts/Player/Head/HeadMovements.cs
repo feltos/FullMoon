@@ -140,4 +140,9 @@ public class HeadMovements : MonoBehaviour
         Debug.DrawLine(transform.position, headPos.transform.position);
         Debug.Log(headState);
     }
+
+    public void Repop()
+    {
+        headState = State.ONBODY;
+    }
 }

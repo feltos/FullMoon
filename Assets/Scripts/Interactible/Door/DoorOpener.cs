@@ -12,6 +12,7 @@ public class DoorOpener : MonoBehaviour
     Vector3 basePosition;
     Vector3 desiredPosition;
     [SerializeField] float openingSpeed;
+    [SerializeField] BoxCollider collider;
 
     private void Start()
     {
@@ -29,8 +30,7 @@ public class DoorOpener : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {        
         UpdateButtonState();
         CheckIfCanOpen();
 
@@ -77,5 +77,13 @@ public class DoorOpener : MonoBehaviour
         {
             Debug.DrawLine(transform.position, button.transform.GetChild(0).position);
         }        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            other.gameObject.GetComponent<PlayerLifeSystem>().TakingDamage(Vector3.zero, 5);
+        }
     }
 }
