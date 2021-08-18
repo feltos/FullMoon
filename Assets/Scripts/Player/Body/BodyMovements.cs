@@ -32,8 +32,7 @@ public class BodyMovements : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        noHeadGravity = baseGravity * 6;
-        
+        noHeadGravity = baseGravity * 6;       
     }
 
     void Update()
@@ -48,12 +47,11 @@ public class BodyMovements : MonoBehaviour
         }
 
         CheckGroundStatus();
-
   
         if (isGrounded)
         {
             verticalVelocity = -gravity * Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || InputManager.ActiveDevice.Action1.IsPressed)
             {
                 verticalVelocity = jumpForce;       
             }

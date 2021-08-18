@@ -39,8 +39,6 @@ public class CameraSwitch : MonoBehaviour
 
         minPosY = minPosTransformY.position.y - 4;
         maxPosY = maxPosTransformY.position.y + offset.y;
-
-
     }
 
     Vector3 ClampCamera(Vector3 targetPosition)

@@ -45,6 +45,8 @@ public class HeadMovements : MonoBehaviour
         {
             case State.ONBODY:
 
+                transform.position = headPos.transform.position;
+
                 if (Input.GetKeyDown(KeyCode.LeftAlt))
                 {
                     transform.parent = null;
@@ -112,7 +114,6 @@ public class HeadMovements : MonoBehaviour
                 break;
 
             case State.ONREPOP:
-
 
                 if (Input.GetKey(KeyCode.LeftAlt))
                 {
